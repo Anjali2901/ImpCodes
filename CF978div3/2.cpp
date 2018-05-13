@@ -1,3 +1,5 @@
+//http://codeforces.com/contest/978/problem/B
+//written by Anjali Pandey
 #include <bits/stdc++.h>
 using namespace std;
 
