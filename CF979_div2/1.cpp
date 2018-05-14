@@ -1,4 +1,5 @@
-http://codeforces.com/contest/979/problem/A
+//http://codeforces.com/contest/979/problem/A
+//written by Anjali Pandey
 
 #include <iostream>
 #include <algorithm>
