@@ -12,12 +12,12 @@ void matrix_power(ll A[][2],ll x)
    	if(x%2==1)
    	{
    	   //res =  matrix_multiplication(res,A);
-   	   ll sh,ik,he,rr;
-   	   sh=res[0][0],ik=res[0][1],he=res[1][0],rr=res[1][1];
-   	   res[0][0] = ((sh*A[0][0])%mod + (ik*A[1][0])%mod)%mod;
-   	   res[0][1] = ((sh*A[0][1])%mod + (ik*A[1][1])%mod)%mod;  
-   	   res[1][0] = ((he*A[0][0])%mod + (rr*A[1][0])%mod)%mod; 
-   	   res[1][1] = ((he*A[0][1])%mod + (rr*A[1][1])%mod)%mod;
+   	   ll sr,ij,h,rr;
+   	   sr=res[0][0],ij=res[0][1],h=res[1][0],rr=res[1][1];
+   	   res[0][0] = ((sr*A[0][0])%mod + (ij*A[1][0])%mod)%mod;
+   	   res[0][1] = ((sr*A[0][1])%mod + (ij*A[1][1])%mod)%mod;  
+   	   res[1][0] = ((h*A[0][0])%mod + (rr*A[1][0])%mod)%mod; 
+   	   res[1][1] = ((h*A[0][1])%mod + (rr*A[1][1])%mod)%mod;
    	}
    	ll p,q,r,s;
 	p = A[0][0],q=A[0][1],r=A[1][0],s=A[1][1];
