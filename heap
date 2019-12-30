@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+long long int ti=0;
+struct trace
+{
+	int value;
+	int key;
+}brr[1002], tempo;
+
+int pos[1002][1002],pcolumn=1;
+
+int arr[10000];
+
+void maxheap(int i, int n)
+{
+    int j, temp;
+    //temp = arr[i];
+    tempo=brr[i];
+    ti+=2;
+    //temp=brr[i].value;
+    j = 2 * i;
+    ti+=2;
+    ti++;
+    int index,flag=0;
+	for(index=1;index<=n;index++)
+	{
+		ti+=2;
+		pos[index][pcolumn+1] = pos[index][pcolumn];
+		ti+=3;
+	}
+	pcolumn++;
+	ti+=2;
+	while (j <= n)
+    {
+    	flag=0;
+    	ti++;
+    	ti+=6;
+    	ti+=2;
+    	ti+=2;
+        if (j < n && brr[j+1].value > brr[j].value)
+        {
+			ti+=2;
+            j = j + 1;
+    	}
+		if (tempo.value > brr[j].value)
+            break;
+        else if (tempo.value <= brr[j].value)
+        {
+        	//flag=1;
+        	//swappping here
+            brr[j / 2] = brr[j];
+			pos[brr[j].key][pcolumn] = j/2;
+    		j = 2 * j;
+    		ti+=9;
+        }
+    }
+    brr[j/2] = tempo;
+    ti+=3;
+    //one insertion block is completed here
+    //update positions now 
+	pos[tempo.key][pcolumn] = j/2;
+	ti+=3;	
+	return;
+}
+void build(int n)
+{
+    int i;
+    ti+=2;
+    for(i = n/2; i >= 1; i--)
+    {
+    	ti+=2;
+        maxheap(i,n);
+    }
+}
+
+int main()
+{
+
+    int n, i, x;
+    printf("enter no of elements of array \n");
+    scanf("%d",&n);
+	printf("enter the elements\n");
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d",&arr[i]);
+		brr[i].key=i;
+		brr[i].value=arr[i];
+		pos[i][pcolumn] = i;
+	}
+	build(n);
+	printf("Max Heap\n");
+    for (i = 1; i <= n; i++)
+    {
+        printf("%d ",brr[i].value);
+    }
+    printf("\n");
+    printf("The tracing goes like: \n");
+    int j;
+    ti+=2;
+	for(i=1;i<=n;i++)
+	{
+		ti+=2;
+		ti+=2;
+		for(j=1;j<=n;j++)
+		{
+			ti+=2;
+			ti+=2;
+			if(brr[j].key == i)
+			{
+				printf("Printing index of %d at each iteration: ",brr[j].value);
+				break;
+			}
+		}
+		for(j=1;j<=pcolumn;j++)
+		{
+			ti+=2;
+			printf("%d ",pos[i][j]);
+		}
+		printf("\n");
+	}
+	printf("%d %lld",n,ti);
+	printf("\n");
+}
