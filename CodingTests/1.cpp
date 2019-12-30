@@ -26,3 +26,5 @@ int main() {
 // 10(8(..)7(6(..)5(4(..)3(..))))
 //output : 65 
 //qstn : to find nodes at level given , here 2 .
+
+//asked in Directi
