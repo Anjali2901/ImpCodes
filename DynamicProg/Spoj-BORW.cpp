@@ -125,5 +125,86 @@ int main()
 }
 
 __________________________________________________________
-Method 3 : DP 
+Method 3 : DP (top down approach)
 
+#include <bits/stdc++.h>
+#define ll long long
+#define pb push_back
+#define mp make_pair
+using namespace std;
+#define N 205
+int n,a[N];
+int dp[N][N][N];
+int min1(int a,int b,int c)
+{
+    return min(a,min(b,c));
+}
+int BorW(int idx,int prevW,int prevB)
+{
+    // three states for dp as clear by the function call, ans depends on the these three values
+    // the constraints for idx, prevW and prevB?
+    //ans here- 200 for index and 10^6 for prevB and prevW
+    // so 200*1e6*1e6 dp array can 't be made
+    //if we look closely 
+    //except the first call prevW and prevB are values from array
+    //so instead of storing the values we can just store the indices
+    //now for the initial idx lets chng smthngs start from idx=2  a[0]=-1 and a[1] = 1e7
+    //sizeof dp array now - 200 * 200 * 200
+    if(idx==n+2) 
+    return 0;
+    //this to return the stored results if we come on the same point again
+    if(dp[idx][prevW][prevB]!=-1)
+       return dp[idx][prevW][prevB];
+    int ans;
+    if(a[idx]>a[prevB] && a[idx]<a[prevW])
+    {
+        //all three colors can be assigned
+        ans=min1(BorW(idx+1,idx,prevB),BorW(idx+1,prevW,idx),1+BorW(idx+1,prevW,prevB));
+    }
+    else if(a[idx]>a[prevB])
+    {
+        //it can't be assigned white
+        ans = min(BorW(idx+1,prevW,idx),1+BorW(idx+1,prevW,prevB));
+    }
+    else if(a[idx]<a[prevW])
+    {
+        //it can't be assigned black
+        ans = min(BorW(idx+1,idx,prevB),1+BorW(idx+1,prevW,prevB));
+    }
+    else 
+    {
+        //it can't be assigned white or black
+        ans = 1+BorW(idx+1,prevW,prevB);
+    }
+    //to store the result for (idx,prevW,prevB)
+    dp[idx][prevW][prevB]=ans;
+    return ans; 
+}
+int main()
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	while(1)
+	{
+		cin>>n;
+		if(n==-1)
+		break;
+		a[0]=-1;a[1]=1e7;
+		for(int i=2;i<=n+1;i++)
+		cin>>a[i];
+		for(int i=0;i<N;i++)
+		{
+		   for(int j=0;j<N;j++)
+		   {
+		       for(int k=0;k<N;k++)
+		       {
+		           dp[i][j][k]=-1;
+		       }
+		   }
+		}
+	// i will indicate array index, j for white and k for black 
+		cout<<BorW(2,1,0)<<"\n";
+	}
+	return 0;
+}
