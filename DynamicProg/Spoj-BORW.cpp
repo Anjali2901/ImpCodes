@@ -50,7 +50,7 @@ int main()
 		break;
 		for(int i=0;i<n;i++)
 		cin>>a[i];
-		cout<<BorW(0,-1,100000000)<<"\n";
+		cout<<BorW(0,100000000,-1)<<"\n";
 	}
 	return 0;
 }
