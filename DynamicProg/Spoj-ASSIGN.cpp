@@ -22,24 +22,19 @@ ll assign(int idx,int mask)
 	{
 	    //checing for all assignments 
 	    int check=mask & (1<<i); //to check if ith bit is 1
-	    if(check>0) 
-	    {
-	        //it means ith bit is 1
-	        //ith assignment is taken
-	        continue;
-	    }
-	    else
+	    if(check==0 && a[idx][i]==1) 
 	    {
 	        //ith bit is 0 
 	        //ith assignment is not taken
 	        //we can or can't assign this assignment to the student with index idx
 	        //we will count the no of ways if this assignment is assigned to this student
-	        ways+=assign(idx+1,mask | (1<<i)) // setting the ith bit of the mask to 1 
+	        ways+=assign(idx+1,mask | (1<<i)); // setting the ith bit of the mask to 1 
  	        //representing the assignment is assigned to this student 
 	    }
 	}
-	//it is also possible that the function can not find a valid assinment which can be assigned to this student
-	//ways =0 then 
+	//it is also possible that the function can not find a valid assignment which can be assigned to this student
+	//we have to check if that assignment is favoured by the student or not 
+	//if a[i][j] is 1 
 	return ways;
 }
 int main()
@@ -60,6 +55,5 @@ int main()
 		cout<<assign(0,0)<<"\n";
 	}
 	return 0;
-}
-_________________________________________________________________________________
+}_________________________________________________________________________________
 Method - 2 : DP 
