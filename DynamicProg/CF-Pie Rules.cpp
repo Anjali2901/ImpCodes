@@ -25,9 +25,9 @@ int pies(int idx,int chance)
     else 
     {
         //alice has the decider token now but we are optimizing bob's slices
-        //pies(idx+1,1)- here alice will keep decider token and not eat
-        // a[idx]+pies(idx+1,0) - here alice eats and gives decider token to bob 
-        ans = min(pies(idx+1,1),a[idx]+pies(idx+1,0));
+        //pies(idx+1,1)+a[idx] - here alice will keep decider token and not eat,so bob will eat
+        //  pies(idx+1,0) - "here alice eats" and gives decider token to bob 
+        ans = min(a[idx]+pies(idx+1,1), pies(idx+1,0));
     }
 
     return ans;
@@ -45,6 +45,6 @@ int main()
 		sum+=a[i];
 	}
 	int bob=pies(0,0);
-	cout<< bob<<" "<<sum-bob;
+	cout<<sum-bob<<" "<<bob;
 	return 0;
 }
