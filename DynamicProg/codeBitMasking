@@ -1,0 +1,45 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int d,n;
+int doc[11][21];
+int dp[21][1025][11];
+int rec(int idx,int mask,int prev) {
+    int m;
+    if(idx == n)
+       return 0;
+    if(prev>=0 && dp[idx][mask][prev]!=-1)
+       return dp[idx][mask][prev];
+    if(prev==-1)
+       m=INT_MAX;
+    else 
+       m=doc[prev][idx]+rec(idx+1,mask,prev);
+    for(int i=0;i<d;i++){
+        int checkmask = mask & (1<<i);
+        int newmask = 0;
+        if(checkmask > 0)
+           continue;
+        else {
+            newmask = mask | (1<<i);
+            m=min(m,doc[i][idx]+rec(idx+1,newmask,i));
+        }
+    }
+    dp[idx][mask][prev] = m;
+    return m;
+}
+int main() 
+{
+    cin>>n>>d;
+    for(int i=0;i<d;i++){
+        for(int j=0;j<n;j++)cin>>doc[i][j];
+    }
+    for(int i=0;i<20;i++){
+        for(int j=0;j<1024;j++){
+            for(int k=0;k<10;k++)
+               dp[i][j][k] = -1;
+        }
+    }
+    cout<<rec(0,0,-1);
+	return 0;
+}
