@@ -1,1 +1,1 @@
-Some important codes and algorithms from leetcode, spoj,codechef etc.
+Some important codes and algorithms from leetcode, hackerearth,spoj,codechef
